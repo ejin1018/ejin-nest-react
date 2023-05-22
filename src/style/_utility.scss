@@ -1,0 +1,40 @@
+/* initial css */
+* { 
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul {
+  margin:0;
+  padding:0;
+  list-style: none;
+}
+a,a:link {
+  display:block;
+  text-decoration: none;
+}
+textarea{
+  resize:none;
+}
+
+/* common style */
+.section_title_en{
+  font-family: 'Cormorant Garamond', serif;
+  font-size:45px;
+  font-weight:500;
+  color:#7e7366;
+}
+.section_title_hide{
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0;
+  line-height: 0;
+}
+.promo_wrap, .acmd_wrap, .dining_wrap, .location_wrap{
+  width:90%;
+  margin:0 auto 150px;
+}
