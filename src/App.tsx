@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Header />
+        <Header togMenu={false} />
         <Main />
       </div>
     </BrowserRouter>

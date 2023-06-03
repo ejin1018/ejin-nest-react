@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 function Main(){
   return(
     <section className="main_wrap" id="main">
+      {/* {상태변수 ? true 태그 : false 태그(없겠지)} */}
       <div className="menu_container">
         <ul className="large_menu_list">
           <li>

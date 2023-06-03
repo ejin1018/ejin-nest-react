@@ -1,9 +1,20 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function Header(){
+
+function Header(props:{togMenu:boolean}){
+  // console.log('props',props.togMenu);
+  
+  let [menuState,setMenuState] = useState(true);
+
+  let openMenu = ()=>{
+    setMenuState((menuState)=>{return !menuState});
+    console.log(menuState)
+  }
+
   return(
     <header className="header_container">
-      <button className="menu_btn">
+      <button className="menu_btn" onClick={openMenu}>
         <span className="top_line"></span>
         <span className="mid_line"></span>
         <span className="bot_line"></span>
