@@ -6,13 +6,12 @@ import './style/style.scss'
 
 function App() {
   let [ menuState,setMenuState ] = useState(false);
-  console.log(menuState)
 
   return (
     <BrowserRouter>
       <div className="App">
         <Header stateChanger={setMenuState} nowState={menuState} />
-        <Main />
+        <Main nowState={menuState} />
       </div>
     </BrowserRouter>
   );
