@@ -1,15 +1,12 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
-
-function Header(props:{togMenu:boolean}){
-  // console.log('props',props.togMenu);
-  
-  let [menuState,setMenuState] = useState(true);
-
+type propsType = {
+  nowState:boolean;
+  stateChanger:React.Dispatch<React.SetStateAction<boolean>>;
+}
+function Header(props:propsType){
   let openMenu = ()=>{
-    setMenuState((menuState)=>{return !menuState});
-    console.log(menuState)
+    props.stateChanger(!props.nowState);
   }
 
   return(
