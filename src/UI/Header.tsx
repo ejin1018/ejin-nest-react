@@ -11,7 +11,7 @@ function Header(props:propsType){
 
   return(
     <header className="header_container">
-      <button className="menu_btn" onClick={openMenu}>
+      <button className={props.nowState?"menu_btn menu_active":"menu_btn"} onClick={openMenu}>
         <span className="top_line"></span>
         <span className="mid_line"></span>
         <span className="bot_line"></span>
