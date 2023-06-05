@@ -1,33 +1,79 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Main(props:{nowState:boolean}){
+  // 선언형 프로그래밍에 대한 고민을 하기...
+  // large_menu 들을 클릭하면 smallOpen 을 true 로 바꾸고 순서에 맞게 보여주고 싶음... 
+  // 원래같으면 querySelectorAll 을 써서 forEach 를 돌리면 그만인데 ... react 에서 useState,useRef로 어떻게 이걸?
+  let [hotelOpen,setHotelOpen] = useState(false);
+  let [promoOpen,setPromoOpen] = useState(false);
+  let [roomOpen,setRoomOpen] = useState(false);
+  let [diningOpen,setDiningOpen] = useState(false);
+  let [eventOpen,setEventOpen] = useState(false);
+  
+  let largeHotelClick = ()=>{
+    setHotelOpen(!hotelOpen);
+    setPromoOpen(false);
+    setRoomOpen(false);
+    setDiningOpen(false);
+    setEventOpen(false);
+  }
+  let largePromoClick = ()=>{
+    setHotelOpen(false);
+    setPromoOpen(!promoOpen);
+    setRoomOpen(false);
+    setDiningOpen(false);
+    setEventOpen(false);
+  }
+  let largeRoomClick = ()=>{
+    setHotelOpen(false);
+    setPromoOpen(false);
+    setRoomOpen(!roomOpen);
+    setDiningOpen(false);
+    setEventOpen(false);
+  }
+  let largeDiningClick = ()=>{
+    setHotelOpen(false);
+    setPromoOpen(false);
+    setRoomOpen(false);
+    setDiningOpen(!diningOpen);
+    setEventOpen(false);
+  }
+  let largeEventClick = ()=>{
+    setHotelOpen(false);
+    setPromoOpen(false);
+    setRoomOpen(false);
+    setDiningOpen(false);
+    setEventOpen(!eventOpen);
+  }
+
   return(
     <section className="main_wrap" id="main">
       {props.nowState?
         <div className="menu_container">
           <ul className="large_menu_list">
             <li>
-              <Link to={'/'} className="large_menu">네스트 호텔<span>ABOUT</span></Link>
+              <Link to={'/'} className="large_menu" onClick={largeHotelClick}>네스트 호텔<span>ABOUT</span></Link>
             </li>
             <li>
               <Link to={'/'} className="large_menu">예약하기<span>RESERVATION</span></Link>
             </li>
             <li>
-              <Link to={'/'} className="large_menu">프로모션<span>PROMOTION</span></Link>
+              <Link to={'/'} className="large_menu" onClick={largePromoClick}>프로모션<span>PROMOTION</span></Link>
             </li>
             <li>
-              <Link to={'/'} className="large_menu">객실 종류<span>ACCOMMODATION</span></Link>
+              <Link to={'/'} className="large_menu" onClick={largeRoomClick}>객실 종류<span>ACCOMMODATION</span></Link>
             </li>
             <li>
-              <Link to={'/'} className="large_menu">식사<span>DINING</span></Link>
+              <Link to={'/'} className="large_menu" onClick={largeDiningClick}>식사<span>DINING</span></Link>
             </li>
             <li>
-              <Link to={'/'} className="large_menu">웨딩&이벤트<span>WEDDING&EVENT</span></Link>
+              <Link to={'/'} className="large_menu" onClick={largeEventClick}>웨딩&이벤트<span>WEDDING&EVENT</span></Link>
             </li>
           </ul>
           <ul className="small_menu_area">
             <li>
-              <ul className="small_menu_list" id="small_hotel">
+              <ul className={hotelOpen? "small_menu_list small_menu_list_on":"small_menu_list"} id="small_hotel">
                 <li>
                   <Link to={'/'} className="small_menu">호텔 전경<span>HOTEL OVERVIEW</span></Link>
                 </li>
@@ -43,7 +89,7 @@ function Main(props:{nowState:boolean}){
               </ul>
             </li>
             <li>
-              <ul className="small_menu_list" id="small_promo">
+              <ul className={promoOpen? "small_menu_list small_menu_list_on":"small_menu_list"} id="small_promo">
                 <li>
                   <Link to={'/'} className="small_menu">패키지<span>PACKAGES</span></Link>
                 </li>
@@ -53,7 +99,7 @@ function Main(props:{nowState:boolean}){
               </ul>
             </li>
             <li>
-              <ul className="small_menu_list" id="small_room">
+              <ul className={roomOpen? "small_menu_list small_menu_list_on":"small_menu_list"} id="small_room">
                 <li>
                   <Link to={'/'} className="small_menu">스탠다드<span>STANDRAD</span></Link>
                 </li>
@@ -75,7 +121,7 @@ function Main(props:{nowState:boolean}){
               </ul>
             </li>
             <li>
-              <ul className="small_menu_list" id="small_dining">
+              <ul className={diningOpen? "small_menu_list small_menu_list_on":"small_menu_list"} id="small_dining">
                 <li>
                   <Link to={'/'} className="small_menu">플라츠<span>PLATZ</span></Link>
                 </li>
@@ -97,7 +143,7 @@ function Main(props:{nowState:boolean}){
               </ul>
             </li>
             <li>
-              <ul className="small_menu_list" id="small_event">
+              <ul className={eventOpen? "small_menu_list small_menu_list_on":"small_menu_list"} id="small_event">
                 <li>
                   <Link to={'/'} className="small_menu">바움 홀<span>BAUM HALL</span></Link>
                 </li>
