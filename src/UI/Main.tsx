@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useState,useReducer } from "react";
 import { Link } from "react-router-dom";
+
+
+let openReducer = (state:boolean,action:any)=>{
+  console.log('reducer work',state,action)
+
+  if(action.type === 'open'){
+    return {type:'open',state:true}
+  }
+}
 
 function Main(props:{nowState:boolean}){
   // 선언형 프로그래밍에 대한 고민을 하기...
   // large_menu 들을 클릭하면 smallOpen 을 true 로 바꾸고 순서에 맞게 보여주고 싶음... 
   // 원래같으면 querySelectorAll 을 써서 forEach 를 돌리면 그만인데 ... react 에서 useState,useRef로 어떻게 이걸?
+  const [state,dispatchOpen] = useReducer<any>(openReducer,false);
+  
   let [hotelOpen,setHotelOpen] = useState(false);
   let [promoOpen,setPromoOpen] = useState(false);
   let [roomOpen,setRoomOpen] = useState(false);
@@ -56,7 +67,7 @@ function Main(props:{nowState:boolean}){
               <Link to={'/'} className="large_menu" onClick={largeHotelClick}>네스트 호텔<span>ABOUT</span></Link>
             </li>
             <li>
-              <Link to={'/'} className="large_menu">예약하기<span>RESERVATION</span></Link>
+              <Link to={'/'} className="large_menu" onClick={()=>{dispatchOpen()}}>예약하기<span>RESERVATION</span></Link>
             </li>
             <li>
               <Link to={'/'} className="large_menu" onClick={largePromoClick}>프로모션<span>PROMOTION</span></Link>
