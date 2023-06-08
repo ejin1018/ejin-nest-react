@@ -1,25 +1,22 @@
-import { useState,useReducer } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-type StateType = {
-  open:boolean;
-}
-type ActionType = {type:'Hotel'; open:true}|{type:'Promo'; open:true};
-
-function reducer(state:StateType,action:ActionType){
-  console.log('reducer 작동 ', state,action)
-}
 
 function Main(props:{nowState:boolean}){
 
-  const [state,dispatch] = useReducer<any>(reducer,{open:false});
-  console.log('state ', state, 'dispatch', dispatch)
-  
   let [hotelOpen,setHotelOpen] = useState(false);
   let [promoOpen,setPromoOpen] = useState(false);
   let [roomOpen,setRoomOpen] = useState(false);
   let [diningOpen,setDiningOpen] = useState(false);
   let [eventOpen,setEventOpen] = useState(false);
+
+  // dispatch 함수를 호출 할 때는 전달되는 액션 객체의 형태가 리듀서 함수에서 처리하는 액션의 형식과 일치해야한다
+  // action.type = "Hotel" 이면 hotelOpen 이 true 상태여야 on class 가 붙게끔 되어있음
+  // 어떻게 제어할 것인가 일단 useState 는 사용하지 않는다
+  // 대메뉴를 눌렀을 때 dispatch 로 type과 open 이 전달되면 action.open 이 true 일 때 class 가 붙도록 한다?
+
+  // useReducer(reducer함수이름, 초기값{type:false, isValid:true}) 이면
+  // reducer 함수 내부에서 리턴해주는 값도 return {type:true, isValid:false} ... 
   
   let largeHotelClick = ()=>{
     setHotelOpen(!hotelOpen);
@@ -27,7 +24,6 @@ function Main(props:{nowState:boolean}){
     setRoomOpen(false);
     setDiningOpen(false);
     setEventOpen(false);
-    dispatch()
   }
   let largePromoClick = ()=>{
     setHotelOpen(false);
@@ -289,8 +285,8 @@ function Main(props:{nowState:boolean}){
           </div>
         </div>
         <div className="reserv_bar">
-          <select id="reserv_type" >
-            <option value="rvRoom" selected>객실 예약</option>
+          <select id="reserv_type">
+            <option value="rvRoom">객실 예약</option>
             <option value="rvRstr">레스토랑 예약</option>
             <option value="rvRsvc">룸서비스 예약</option>
           </select>
