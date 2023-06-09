@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState,useReducer } from "react";
 import { Link } from "react-router-dom";
 
+function reducer(){
+
+}
 
 function Main(props:{nowState:boolean}){
 
@@ -14,6 +17,20 @@ function Main(props:{nowState:boolean}){
   // action.type = "Hotel" 이면 hotelOpen 이 true 상태여야 on class 가 붙게끔 되어있음
   // 어떻게 제어할 것인가 일단 useState 는 사용하지 않는다
   // 대메뉴를 눌렀을 때 dispatch 로 type과 open 이 전달되면 action.open 이 true 일 때 class 가 붙도록 한다?
+  // ui 에서는 삼항연산자를 사용중이기 때문에 여기서는 true 만 전달해주면 된다
+
+  // type initialType = {types:{type:string; open:boolean}[]}
+  // const initialState:initialType = {types:[{type:'',open:false}]}
+
+  type State = {
+    type:string;
+    open:boolean;
+  };
+  const initialState: State = {
+    type: '',
+    open: false,
+  };  
+  let [state,dispatch] = useReducer(reducer,initialState)
 
   // useReducer(reducer함수이름, 초기값{type:false, isValid:true}) 이면
   // reducer 함수 내부에서 리턴해주는 값도 return {type:true, isValid:false} ... 
