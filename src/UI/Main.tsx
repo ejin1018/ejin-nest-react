@@ -1,17 +1,16 @@
 import { useState,useReducer } from "react";
 import { Link } from "react-router-dom";
 
-function reducer(){
-
+type actType = {type:string, payload:any}[]
+function reducer(state:string,action:actType):{}{
+  console.log('reducer on',state,action)
+  return {type:'OPEN', payload:'true'}
 }
 
 function Main(props:{nowState:boolean}){
-
-  let [hotelOpen,setHotelOpen] = useState(false);
-  let [promoOpen,setPromoOpen] = useState(false);
-  let [roomOpen,setRoomOpen] = useState(false);
-  let [diningOpen,setDiningOpen] = useState(false);
-  let [eventOpen,setEventOpen] = useState(false);
+  type initType={open:boolean;}
+  const init:initType = {open:false}
+  const [state,dispatch] = useReducer<any>(reducer,init);
 
   // dispatch 함수를 호출 할 때는 전달되는 액션 객체의 형태가 리듀서 함수에서 처리하는 액션의 형식과 일치해야한다
   // action.type = "Hotel" 이면 hotelOpen 이 true 상태여야 on class 가 붙게끔 되어있음
@@ -22,18 +21,15 @@ function Main(props:{nowState:boolean}){
   // type initialType = {types:{type:string; open:boolean}[]}
   // const initialState:initialType = {types:[{type:'',open:false}]}
 
-  type State = {
-    type:string;
-    open:boolean;
-  };
-  const initialState: State = {
-    type: '',
-    open: false,
-  };  
-  let [state,dispatch] = useReducer(reducer,initialState)
-
   // useReducer(reducer함수이름, 초기값{type:false, isValid:true}) 이면
   // reducer 함수 내부에서 리턴해주는 값도 return {type:true, isValid:false} ... 
+
+
+  let [hotelOpen,setHotelOpen] = useState(false);
+  let [promoOpen,setPromoOpen] = useState(false);
+  let [roomOpen,setRoomOpen] = useState(false);
+  let [diningOpen,setDiningOpen] = useState(false);
+  let [eventOpen,setEventOpen] = useState(false);
   
   let largeHotelClick = ()=>{
     setHotelOpen(!hotelOpen);
@@ -80,7 +76,7 @@ function Main(props:{nowState:boolean}){
               <Link to={'/'} className="large_menu" onClick={largeHotelClick}>네스트 호텔<span>ABOUT</span></Link>
             </li>
             <li>
-              <Link to={'/'} className="large_menu">예약하기<span>RESERVATION</span></Link>
+              <Link to={'/'} className="large_menu" onClick={()=>dispatch()}>예약하기<span>RESERVATION</span></Link>
             </li>
             <li>
               <Link to={'/'} className="large_menu" onClick={largePromoClick}>프로모션<span>PROMOTION</span></Link>
